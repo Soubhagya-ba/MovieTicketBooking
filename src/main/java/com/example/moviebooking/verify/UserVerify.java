@@ -26,7 +26,7 @@ public class UserVerify {
                 "<div style='margin: 20px 0; text-align: center;'>" +
                 "<span style='font-size: 28px; font-weight: bold; color: #ffffff; background-color: #3498db; padding: 10px 20px; border-radius: 6px; letter-spacing: 4px; display: inline-block;'>" + otp + "</span>" +
                 "</div>" +
-                "<p style='font-size: 14px; color: #888;'>Best regards,<br> Banerjee Bank Of India</p>" +
+                "<p style='font-size: 14px; color: #888;'>Best regards,<br> Book My Ticket</p>" +
                 "</div>";
 
         helper.setText(htmlContent, true);

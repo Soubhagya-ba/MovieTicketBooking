@@ -43,7 +43,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public String login(UserLoginRequest request, HttpServletRequest httpRequest) {
         UserDetails userDetails = userDetailsRepository.findByEmail(request.email()).orElseThrow(() -> new InvalidEmailException("Invalid Email Id"));
         if (passwordEncoder.matches(request.password(), userDetails.getPassword())) {
-            List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_USER"));
+            List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(userDetails.getUserRole().name()));
             Authentication auth = new UsernamePasswordAuthenticationToken(userDetails.getUserId(),null,authorities);
             SecurityContextHolder.getContext().setAuthentication(auth);
             httpRequest.getSession(true).setAttribute("SPRING_SECURITY_CONTEXT",SecurityContextHolder.getContext());
