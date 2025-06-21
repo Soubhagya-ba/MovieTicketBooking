@@ -19,6 +19,7 @@ public class ScreenMapper {
     public static ScreenResponse toResponse(Screen screen){
         return new ScreenResponse(
                 screen.getScreenId(),
+                screen.getName(),
                 screen.getScreenType(),
                 screen.getCapacity(),
                 screen.getNoOfRows(),

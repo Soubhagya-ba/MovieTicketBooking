@@ -3,7 +3,9 @@ package com.example.moviebooking.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,6 +20,9 @@ public class Theater {
     @ManyToOne
     @JoinColumn(name = "theater_owner_id")
     private TheaterOwner theaterOwner;
+
+    @OneToMany(mappedBy = "theater")
+    private List<Show> shows;
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,10 +21,16 @@ public class Screen {
     @JoinColumn(name = "theater_id")
     private Theater theater;
 
+    @OneToMany(mappedBy = "screen")
+    private List<Show> shows;
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "screenId", updatable = false, nullable = false)
     private String screenId;
+
+    @Column(name = "name",nullable = false)
+    private String name;
 
     @Column(name = "screen_type", updatable = false, nullable = false)
     private ScreenType screenType;
