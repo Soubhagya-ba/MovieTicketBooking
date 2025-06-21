@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,6 +15,10 @@ import java.time.LocalDateTime;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "user_details")
 public class UserDetails {
+
+    @OneToMany(mappedBy = "userDetails")
+    private List<Feedback> feedbacks;
+
 
     @Id
     @Column(name = "user_id",updatable = false,nullable = false)

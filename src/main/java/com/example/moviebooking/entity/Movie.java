@@ -7,12 +7,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Duration;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "movie")
 public class Movie {
+
+    @OneToMany(mappedBy = "movie")
+    private List<Feedback> feedbacks;
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

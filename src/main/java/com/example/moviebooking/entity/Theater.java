@@ -24,6 +24,9 @@ public class Theater {
     @OneToMany(mappedBy = "theater")
     private List<Show> shows;
 
+    @OneToMany(mappedBy = "theater")
+    private List<Feedback> feedbacks;
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "theater_id",nullable = false,updatable = false)
