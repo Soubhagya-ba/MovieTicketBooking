@@ -35,6 +35,21 @@ public class UserExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_ACCEPTABLE.value(), e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(errorResponse);
     }
+    @ExceptionHandler(UserNotLoggedInException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotLoginIn(UserNotLoggedInException e){
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.UNAUTHORIZED.value(), e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+    }
+    @ExceptionHandler(PasswordNotMatchException.class)
+    public ResponseEntity<ErrorResponse> handlePasswordNotMatching(PasswordNotMatchException e){
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_ACCEPTABLE.value(), e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(errorResponse);
+    }
+    @ExceptionHandler(RecentlyUsedPasswordException.class)
+    public ResponseEntity<ErrorResponse> handleRecentlyUsedPassword(RecentlyUsedPasswordException e){
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_ACCEPTABLE.value(), e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(errorResponse);
+    }
 
 
 

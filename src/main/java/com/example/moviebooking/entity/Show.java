@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Setter
@@ -24,11 +25,13 @@ public class Show {
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
+    @OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
+    private List<ShowSeat> showSeats;
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "show_id",nullable = false,updatable = false)
-    private String showId;
+    private String id;
 
     @Column(name = "starts_at",nullable = false)
     private LocalDateTime startsAt;

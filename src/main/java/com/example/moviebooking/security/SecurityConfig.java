@@ -24,7 +24,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.csrf(csrf->csrf.disable())
                 .cors(Customizer.withDefaults())//For Enable Cross Origin
-                .authorizeHttpRequests(auth->auth.requestMatchers("/verify","/register","/userLogin").permitAll()
+                .authorizeHttpRequests(auth->auth.requestMatchers("/send-otp","/register","/userLogin").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form->form.defaultSuccessUrl("/dashboard",true).permitAll())
                 .build();

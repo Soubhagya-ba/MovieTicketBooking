@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 public class ScreenMapper {
 
     public static Screen toEntity(ScreenRequest source, Screen target){
+        target.setName(source.name());
         target.setScreenType(source.screenType());
         target.setCapacity(source.capacity());
         target.setNoOfRows(source.noOfRows());

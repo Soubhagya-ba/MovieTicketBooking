@@ -1,25 +1,20 @@
 package com.example.moviebooking.serviceimpl;
 
 import com.example.moviebooking.dto.request.MovieShowRequest;
-import com.example.moviebooking.entity.Movie;
-import com.example.moviebooking.entity.Screen;
-import com.example.moviebooking.entity.Show;
-import com.example.moviebooking.entity.Theater;
+import com.example.moviebooking.entity.*;
 import com.example.moviebooking.exception.InvalidTheaterIdException;
 import com.example.moviebooking.exception.MovieNotFoundException;
 import com.example.moviebooking.exception.ScreenNotFoundException;
 import com.example.moviebooking.exception.TheaterOwnerNotLoginException;
-import com.example.moviebooking.repository.MovieRepository;
-import com.example.moviebooking.repository.ScreenRepository;
-import com.example.moviebooking.repository.TheaterRepository;
+import com.example.moviebooking.repository.*;
 import com.example.moviebooking.security.AuthUtilities;
-import com.example.moviebooking.repository.MovieShowRepository;
 import com.example.moviebooking.service.MovieShowService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -30,6 +25,8 @@ public class MovieShowServiceImpl implements MovieShowService {
     private ScreenRepository screenRepository;
     private MovieRepository movieRepository;
     private MovieShowRepository movieShowRepository;
+    private SeatRepository seatRepository;
+    private ShowSeatRepository showSeatRepository;
 
 
     @Override
@@ -52,6 +49,21 @@ public class MovieShowServiceImpl implements MovieShowService {
         show.setTheater(theater);
         show.setMovie(movie);
         movieShowRepository.save(show);
+
+        List<Seat> seats = seatRepository.findByScreen(screen);
+        List<ShowSeat> showSeats = new ArrayList<>();
+
+        for (Seat seat : seats){
+            ShowSeat showSeat = new ShowSeat();
+            showSeat.setBooked(false);
+            showSeat.setLocked(false);
+            showSeat.setLockedAt(null);
+            showSeat.setLockedBy(null);
+            showSeat.setSeat(seat);
+            showSeat.setShow(show);
+            showSeats.add(showSeat);
+        }
+        showSeatRepository.saveAll(showSeats);
 
         return "Show Created For "+theater.getName()+" -> "+screen.getName()+" -> "+movie.getTitle();
     }
